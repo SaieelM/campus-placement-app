@@ -14,10 +14,17 @@ RUN npm run build
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
 
+# Default backend connection variables (can be overridden at runtime)
+ENV BACKEND_HOST=backend
+ENV BACKEND_PORT=5000
+
 # Copy build artifacts to Nginx docroot
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom Nginx configuration
+# Copy template for dynamic environment substitution at container startup
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+# Fallback default static config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose HTTP port
