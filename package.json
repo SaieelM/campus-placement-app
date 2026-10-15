@@ -5,25 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node server/index.js",
-    "client": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "lucide-react": "^0.380.0",
-    "mysql2": "^3.9.8",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "server": "npm run dev --prefix backend",
+    "client": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.0",
-    "concurrently": "^8.2.2",
-    "vite": "^5.2.11"
+    "concurrently": "^8.2.2"
   }
 }
